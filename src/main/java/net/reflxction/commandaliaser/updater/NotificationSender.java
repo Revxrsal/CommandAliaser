@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.reflxction.example.updater;
+package net.reflxction.commandaliaser.updater;
 
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.FMLNetworkEvent.ClientConnectedToServerEvent;
-import net.reflxction.example.ExampleMod;
-import net.reflxction.example.commons.Settings;
-import net.reflxction.example.utils.Reference;
-import net.reflxction.example.utils.SimpleSender;
+import net.reflxction.commandaliaser.CommandAliaser;
+import net.reflxction.commandaliaser.commons.Settings;
+import net.reflxction.commandaliaser.utils.Reference;
+import net.reflxction.commandaliaser.utils.SimpleSender;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,6 +29,12 @@ import java.util.TimerTask;
  * Listener which sends the player a notification update
  */
 public class NotificationSender {
+
+    private CommandAliaser m;
+
+    public NotificationSender(CommandAliaser m) {
+        this.m = m;
+    }
 
     // Whether the notification was already sent or not
     private boolean sent;
@@ -39,7 +45,7 @@ public class NotificationSender {
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (ExampleMod.INSTANCE.getChecker().isUpdateAvailable()) {
+                    if (m.getChecker().isUpdateAvailable()) {
                         SimpleSender.send("&eAn update is available for &b" + Reference.NAME + "&e! To update, do &a/examplemod update&e.");
                         sent = true;
                     }

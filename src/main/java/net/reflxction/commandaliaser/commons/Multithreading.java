@@ -13,18 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.reflxction.example.commons;
+package net.reflxction.commandaliaser.commons;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * A utility that uses Java's concurrency for multithreading
  */
 public class Multithreading {
 
-    // The executor service, which uses a thread pool of 50 threads
-    private static final ExecutorService SERVICE = Executors.newFixedThreadPool(50, Thread::new);
+    // The executor service, which uses a thread pool of 100 threads
+    public static final ExecutorService SERVICE = Executors.newFixedThreadPool(100, Thread::new);
+
+    public static final ScheduledExecutorService SCHEDULED_EXECUTOR_SERVICE = Executors.newScheduledThreadPool(10);
 
     /**
      * Runs a task asynchronously on the thread pool

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.reflxction.example.updater;
+package net.reflxction.commandaliaser.updater;
 
 import net.minecraft.client.Minecraft;
-import net.reflxction.example.ExampleMod;
-import net.reflxction.example.utils.Reference;
+import net.reflxction.commandaliaser.CommandAliaser;
+import net.reflxction.commandaliaser.utils.Reference;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -29,6 +29,8 @@ import java.net.URL;
  */
 public class UpdateManager {
 
+    private CommandAliaser aliaser;
+
     // Whether the new version is a snapshot or not
     private boolean snapshot;
 
@@ -37,8 +39,9 @@ public class UpdateManager {
      *
      * @param snapshot Whether the new version is a snapshot or not
      */
-    public UpdateManager(boolean snapshot) {
+    public UpdateManager(boolean snapshot, CommandAliaser m) {
         this.snapshot = snapshot;
+        aliaser = m;
     }
 
     /**
@@ -64,7 +67,7 @@ public class UpdateManager {
     }
 
     private String getDownloadLink() {
-        String version = String.valueOf(ExampleMod.INSTANCE.getChecker().getLatestVersion()) + (snapshot ? "-SNAPSHOT" : "");
+        String version = String.valueOf(aliaser.getChecker().getLatestVersion()) + (snapshot ? "-SNAPSHOT" : "");
         return "https://github.com/ReflxctionDev/" +
                 Reference.REPOSITORY_NAME +
                 "/" +

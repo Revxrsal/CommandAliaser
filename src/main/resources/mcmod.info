@@ -1,11 +1,11 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "A mod which does something cool.",
+  "modid": "commandaliaser",
+  "name": "Command Aliaser",
+  "description": "A mod which creates aliases for commands easily.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "http://www.github.com/ReflxctionDev/ExampleMod",
+  "url": "http://www.github.com/ReflxctionDev/CommandAliaser",
   "updateUrl": "",
   "authorList": ["Reflxction"],
   "credits": "Reflxction",

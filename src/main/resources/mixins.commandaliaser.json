@@ -1,0 +1,9 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "net.reflxction.commandaliaser.mixins",
+  "refmap": "mixin.commandaliaser.refmap.json",
+  "verbose": true,
+  "mixins": [
+    "MixinEntityPlayerSP"
+  ]
+}

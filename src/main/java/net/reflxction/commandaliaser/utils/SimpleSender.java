@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.reflxction.example.utils;
+package net.reflxction.commandaliaser.utils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
-import net.reflxction.example.commons.ChatColor;
+import net.reflxction.commandaliaser.commons.ChatColor;
 
 /**
  * Class which simplifies the {@link net.minecraft.entity.player.EntityPlayer#addChatMessage(IChatComponent)} method and shortens it
@@ -38,6 +38,16 @@ public class SimpleSender {
             messageBuilder.append(word).append(" ");
         }
         Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText(Reference.PREFIX + ChatColor.format(messageBuilder.toString().trim())));
+    }
+
+    /**
+     * Executes the given command (or sends the text)
+     *
+     * @param text Text to send
+     */
+    public static void execute(String text) {
+        if (Minecraft.getMinecraft().thePlayer == null) return; // <- For safety
+        Minecraft.getMinecraft().thePlayer.sendChatMessage(text);
     }
 
 }

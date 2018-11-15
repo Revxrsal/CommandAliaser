@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.reflxction.example.commons;
+package net.reflxction.commandaliaser.commons;
 
-import net.reflxction.example.ExampleMod;
+import net.minecraftforge.common.config.Configuration;
+import net.reflxction.commandaliaser.CommandAliaser;
 
 /**
  * A class with all commons as constants
@@ -58,14 +59,15 @@ public class Settings {
             this.category = category;
             this.configName = configName;
             this.defaultValue = defaultValue;
+            Configuration config = CommandAliaser.getConfig();
             if (defaultValue instanceof Boolean)
-                value = ExampleMod.INSTANCE.getConfig().get(category, configName, (boolean) defaultValue).getBoolean();
+                value = config.get(category, configName, (boolean) defaultValue).getBoolean();
             else if (defaultValue instanceof Integer)
-                value = ExampleMod.INSTANCE.getConfig().get(category, configName, (int) defaultValue).getInt();
+                value = config.get(category, configName, (int) defaultValue).getInt();
             else if (defaultValue instanceof Double)
-                value = ExampleMod.INSTANCE.getConfig().get(category, configName, (double) defaultValue).getDouble();
+                value = config.get(category, configName, (double) defaultValue).getDouble();
             else if (defaultValue instanceof String)
-                value = ExampleMod.INSTANCE.getConfig().get(category, configName, (String) defaultValue).getString();
+                value = config.get(category, configName, (String) defaultValue).getString();
         }
 
         /**
@@ -95,17 +97,18 @@ public class Settings {
          */
         public void set(T value) {
             this.value = value;
+            Configuration config = CommandAliaser.getConfig();
             if (value instanceof Boolean)
-                ExampleMod.INSTANCE.getConfig().get(category, configName, (Boolean) defaultValue).set((Boolean) value);
+                config.get(category, configName, (Boolean) defaultValue).set((Boolean) value);
             else if (value instanceof Integer)
-                ExampleMod.INSTANCE.getConfig().get(category, configName, (Integer) defaultValue).set((Integer) value);
+                config.get(category, configName, (Integer) defaultValue).set((Integer) value);
             else if (value instanceof Double)
-                ExampleMod.INSTANCE.getConfig().get(category, configName, (Double) defaultValue).set((Double) value);
+                config.get(category, configName, (Double) defaultValue).set((Double) value);
             else if (value instanceof String)
-                ExampleMod.INSTANCE.getConfig().get(category, configName, (String) defaultValue).set((String) value);
+                config.get(category, configName, (String) defaultValue).set((String) value);
             else
-                ExampleMod.INSTANCE.getConfig().get(category, configName, defaultValue.toString()).set(value.toString());
-            ExampleMod.INSTANCE.getConfig().save();
+                config.get(category, configName, defaultValue.toString()).set(value.toString());
+            config.save();
         }
     }
 }

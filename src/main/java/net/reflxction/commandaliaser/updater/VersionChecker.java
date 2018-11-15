@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.reflxction.example.updater;
+package net.reflxction.commandaliaser.updater;
 
-import net.reflxction.example.utils.Reference;
+import net.reflxction.commandaliaser.utils.Reference;
 import net.reflxction.simplejson.json.JsonURLReader;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 
@@ -49,7 +50,7 @@ public class VersionChecker {
             JsonURLReader reader = new JsonURLReader(checkerURL);
             return reader.readContent().getDouble( "version");
         } catch (IOException e) {
-            e.printStackTrace();
+            LogManager.getLogger().warn("Failed to check for update. Will stay on current version.");
         }
         return 1.0;
     }
