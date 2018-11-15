@@ -50,11 +50,11 @@ repositories {
     }
 }
 dependencies {
-    shade 'com.github.ReflxctionDev:SimpleJSON:master-SNAPSHOT'
-    shade('com.github.ReflxctionDev:Simple-YAML:master-SNAPSHOT') {
+    provided 'com.github.ReflxctionDev:SimpleJSON:master-SNAPSHOT'
+    provided('com.github.ReflxctionDev:Simple-YAML:master-SNAPSHOT') {
         exclude module: 'guava'
     }
-    shade('org.spongepowered:mixin:0.6.4-SNAPSHOT') {
+    provided('org.spongepowered:mixin:0.6.4-SNAPSHOT') {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
         exclude module: 'gson'
@@ -83,7 +83,7 @@ processResources
             }
         }
 jar {
-    from configurations.shade.asFileTree.files.collect {
+    from configurations.provided.asFileTree.files.collect {
         zipTree(it)
     }
 
@@ -95,14 +95,11 @@ jar {
     )
 }
 configurations {
-    shade
-    // Make compile extend from our shade configuration so that things added to bundled end up on the compile classpath
-    compile.extendsFrom(shade)
+    provided
+    compile.extendsFrom(provided)
 }
 
 mixin {
-    //searge since forge
-    // Specify "notch" or "searge" here
     defaultObfuscationEnv searge
     add sourceSets.main, "mixins.commandaliaser.refmap.json"
 }
