@@ -20,6 +20,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.reflxction.commandaliaser.CommandAliaser;
+import net.reflxction.commandaliaser.alias.AliasManager;
 import net.reflxction.commandaliaser.commons.ChatColor;
 import net.reflxction.commandaliaser.utils.SimpleSender;
 import org.lwjgl.input.Mouse;
@@ -46,7 +47,7 @@ public class AliasGUI extends GuiScreen {
         drawDefaultBackground();
         commandField.drawTextBox();
         aliasField.drawTextBox();
-		drawString(Minecraft.getMinecraft().fontRendererObj, "Alias", width / 2 - 25, height / 2 - 36, GREEN);
+        drawString(Minecraft.getMinecraft().fontRendererObj, "Alias", width / 2 - 25, height / 2 - 36, GREEN);
         drawString(Minecraft.getMinecraft().fontRendererObj, "Command", width / 2 - 25, height / 2 - 80, AQUA);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
@@ -66,8 +67,12 @@ public class AliasGUI extends GuiScreen {
                 if (!aliasField.getText().isEmpty() && !commandField.getText().isEmpty()) {
                     String command = commandField.getText();
                     String alias = aliasField.getText();
-                    aliaser.getAliasManager().create(command, alias);
-                    SimpleSender.send("&aCreated new alias for &b" + alias);
+                    if (AliasManager.ALIASES.containsKey(alias)) {
+                        SimpleSender.send("&cAn alias with this value already exists! Please choose another value.");
+                    } else {
+                        aliaser.getAliasManager().create(command, alias);
+                        SimpleSender.send("&aCreated new alias for &b" + command);
+                    }
                 }
                 break;
         }

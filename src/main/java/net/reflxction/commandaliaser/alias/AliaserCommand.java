@@ -105,6 +105,10 @@ public class AliaserCommand implements ICommand {
                     case "aliaser":
                         TimerUtils.runAfter(() -> Minecraft.getMinecraft().displayGuiScreen(new AliasGUI(m)), 50);
                         break;
+                    case "save":
+                        m.getAliasManager().save();
+                        SimpleSender.send("&aSuccessfully saved aliases.");
+                        break;
                     default:
                         SimpleSender.send("&cIncorrect command usage. Try " + getCommandUsage(sender));
                         break;
