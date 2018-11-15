@@ -87,11 +87,13 @@ public class AliasGUI extends GuiScreen {
     @Override
     public void initGui() {
         Mouse.setGrabbed(false);
-        super.initGui();
+
+        // Text fields
         aliasField = new GuiTextField(6, fontRendererObj, width / 2 - 70, height / 2 - 70, 140, 20);
         commandField = new GuiTextField(7, fontRendererObj, width / 2 - 70, height / 2 - 26, 140, 20);
-        // Create alias
-        createButton(width / 2 - 70, height / 2);
+
+        // Buttons
+        buttonList.add(new GuiButton(2, width / 2 - 70, height / 2, 140, 20, ChatColor.format("&aCreate alias")));
 
     }
 
@@ -115,10 +117,4 @@ public class AliasGUI extends GuiScreen {
         this.commandField.mouseClicked(x, y, btn);
         this.aliasField.mouseClicked(x, y, btn);
     }
-
-    private void createButton(int x, int y) {
-        this.buttonList.add(new GuiButton(2, x, y, 140, 20, ChatColor.format("&aCreate alias")));
-    }
-
-
 }
