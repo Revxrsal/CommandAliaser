@@ -50,11 +50,11 @@ repositories {
     }
 }
 dependencies {
-    provided 'com.github.ReflxctionDev:SimpleJSON:master-SNAPSHOT'
-    provided('com.github.ReflxctionDev:Simple-YAML:master-SNAPSHOT') {
+    shade 'com.github.ReflxctionDev:SimpleJSON:master-SNAPSHOT'
+    shade('com.github.ReflxctionDev:Simple-YAML:master-SNAPSHOT') {
         exclude module: 'guava'
     }
-    provided('org.spongepowered:mixin:0.6.4-SNAPSHOT') {
+    shade('org.spongepowered:mixin:0.6.4-SNAPSHOT') {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
         exclude module: 'gson'
@@ -83,7 +83,7 @@ processResources
             }
         }
 jar {
-    from configurations.provided.asFileTree.files.collect {
+    from configurations.shade.asFileTree.files.collect {
         zipTree(it)
     }
 
@@ -95,9 +95,9 @@ jar {
     )
 }
 configurations {
-    provided
-    // Make compile extend from our provided configuration so that things added to bundled end up on the compile classpath
-    compile.extendsFrom(provided)
+    shade
+    // Make compile extend from our shade configuration so that things added to bundled end up on the compile classpath
+    compile.extendsFrom(shade)
 }
 
 mixin {
